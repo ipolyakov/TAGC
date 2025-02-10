@@ -224,7 +224,7 @@ COMPRESS_ALL_LAYERS = False
 def custom_wrap_policy(module: torch.nn.Module, recurse: bool, nonwrapped_numel: int) -> bool:
     if not recurse:
         return isinstance(module, torch.nn.Embedding) or isinstance(module, torch.nn.Linear)
-    return nonwrapped_numel > 100000 if COMPRESS_ALL_LAYERS else 2000000
+    return nonwrapped_numel > (100000 if COMPRESS_ALL_LAYERS else 2000000)
 
 if ddp:
     print("Enable FSDP")

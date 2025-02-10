@@ -1,0 +1,25 @@
+diff --git a/torch/distributed/fsdp/_flat_param.py b/torch/distributed/fsdp/_flat_param.py
+index f3e918349a..71cdc4b18e 100644
+--- a/torch/distributed/fsdp/_flat_param.py
++++ b/torch/distributed/fsdp/_flat_param.py
+@@ -1309,6 +1309,7 @@ class FlatParamHandle:
+             return
+         unsharded_flat_param = self._alloc_padded_unsharded_flat_param()
+         padded_unsharded_flat_param = self._all_gather_flat_param(unsharded_flat_param)
++        torch.cuda.set_stream(self._device_handle.default_stream()) # THLC
+         self._use_unsharded_flat_param(padded_unsharded_flat_param)
+ 
+     def needs_unshard(self) -> bool:
+diff --git a/torch/distributed/fsdp/_runtime_utils.py b/torch/distributed/fsdp/_runtime_utils.py
+index 833c1d4569..537860ff33 100644
+--- a/torch/distributed/fsdp/_runtime_utils.py
++++ b/torch/distributed/fsdp/_runtime_utils.py
+@@ -298,7 +298,7 @@ def _unshard(
+                 event.synchronize()
+     with state._device_handle.stream(unshard_stream):
+         handle.unshard()
+-        handle.post_unshard()
++    handle.post_unshard() # THLC
+ 
+ 
+ @no_type_check

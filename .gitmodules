@@ -1,0 +1,3 @@
+[submodule "lossless_homomorphic_compression"]
+	path = lossless_homomorphic_compression
+	url = https://github.com/lihy0529/lossless_homomorphic_compression

@@ -1,10 +1,10 @@
 # THLC
 ## Prerequisites:
 * Pytorch 2.4.1 , install with pip
+## Apply path to Pytorch
 ```
 pip show torch
 ```
-# Apply path to Pytorch
 Get the path to torch installation such as ~/.local/lib/python3.12/site-packages from the pip show output.
 Then use the path to apply the patch:
 ```

@@ -36,7 +36,7 @@ from torch.distributed.fsdp._common_utils import _get_module_fsdp_state
 
 from model import GPTConfig, GPT
 
-from thlc import HomomorphicCompressState, homomorphic_compress_hook, fp32_compress_hook, transformer_compress_hook, IndexSize, THLCState
+from thc import HomomorphicCompressState, homomorphic_compress_hook, fp32_compress_hook, transformer_compress_hook, IndexSize, THCState
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText
@@ -237,13 +237,13 @@ if ddp:
     is_transformer_hook = (lambda numel: numel != 2359296 and numel != 38633472
                            and (not COMPRESS_ALL_LAYERS
                            or numel != 1769472 and numel != 589824 and numel != 393216))
-    state = THLCState(process_group=_get_default_group(),
-                      num_processes=ddp_world_size,
-                      process_index=ddp_rank,
-                      sparsify_fraction=0.80,
-                      index_size=IndexSize.ONE_BIT,
-                      compress_ratio=2,
-                      is_transformer_hook=is_transformer_hook)
+    state = THCState(process_group=_get_default_group(),
+                     num_processes=ddp_world_size,
+                     process_index=ddp_rank,
+                     sparsify_fraction=0.80,
+                     index_size=IndexSize.ONE_BIT,
+                     compress_ratio=2,
+                     is_transformer_hook=is_transformer_hook)
     model.register_comm_hook(state, transformer_compress_hook)
 
 # helps estimate an arbitrarily accurate loss over either split using many batches

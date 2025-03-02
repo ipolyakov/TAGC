@@ -1,4 +1,4 @@
-# TLC
+# THC
 ## Prerequisites:
 * Pytorch 2.4.1 , install with pip
 ## Apply path to Pytorch

@@ -332,7 +332,7 @@ def homomorphic_compress_shard_aligned_sparsified(state: HomomorphicCompressStat
         api.torch_launch_estimate_float_32(output, state.count_sketches[shard], compressed_r, grid_size, BLOCK_SIZE)
 
 
-class THLCState(HomomorphicCompressState):
+class THCState(HomomorphicCompressState):
     __slots__ = [
         "is_transformer_hook",
     ]
@@ -352,7 +352,7 @@ class THLCState(HomomorphicCompressState):
         self.is_transformer_hook = is_transformer_hook
 
 
-def transformer_compress_hook(state: THLCState, grad: torch.Tensor, output: Optional[torch.Tensor] = None):
+def transformer_compress_hook(state: THCState, grad: torch.Tensor, output: Optional[torch.Tensor] = None):
     if output is None:
         return default_hooks.allreduce_hook(state, grad)
 

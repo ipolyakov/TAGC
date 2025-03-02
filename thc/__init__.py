@@ -1,8 +1,8 @@
-from .thlc import (
+from .thc import (
     fp32_compress_hook,
     HomomorphicCompressState,
     homomorphic_compress_hook,
     IndexSize,
-    THLCState,
+    THCState,
     transformer_compress_hook,
 )

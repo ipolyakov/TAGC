@@ -1,9 +1,9 @@
 [project]
 version = "0.1.0"
-name = "thc"
+name = "tagc"
 
 [tool.setuptools.packages.find]
-include = ["thc"]
+include = ["tagc"]
 
 [tool.isort]
 profile = "black"

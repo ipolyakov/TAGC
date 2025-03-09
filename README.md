@@ -1,4 +1,4 @@
-# THC
+# TAGC
 ## Prerequisites:
 * Pytorch 2.4.1 , install with pip
 ## Apply path to Pytorch
@@ -8,12 +8,12 @@ pip show torch
 Get the path to torch installation such as ~/.local/lib/python3.12/site-packages from the pip show output.
 Then use the path to apply the patch:
 ```
-git apply --unsafe-paths --directory ~/.local/lib/python3.12/site-packages thc/patches/torch.diff
+git apply --unsafe-paths --directory ~/.local/lib/python3.12/site-packages TAGC/patches/torch.diff
 ```
 
-Install HLC and THC:
+Install LHC and TAGC:
 ```
-cd thc
+cd TAGC
 git submodule update --init
 pip install lossless_homomorphic_compression/lossless_homomorphic_compression_api
 pip install .
